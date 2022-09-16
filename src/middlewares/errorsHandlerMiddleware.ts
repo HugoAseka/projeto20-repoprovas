@@ -1,17 +1,19 @@
-import { NextFunction, Request, Response } from "express";
-import { errorTypeToStatusCode, isAppError } from "../utils/errorUtil.js";
+import { NextFunction, Request, Response } from 'express';
+
+import { errorTypeToStatusCode, isAppError } from '../utils/errorUtil';
 
 export default function errorsHandlerMiddleware(
-  error,
+  err,
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  console.log("An Error Occurred!", error);
+  console.log('Ooops! An error occured!', err);
 
-  if (isAppError(error)) {
-    const statusCode = errorTypeToStatusCode(error.type);
-    return res.status(statusCode).send(error.message);
+  if (isAppError(err)) {
+    const statusCode = errorTypeToStatusCode(err.type);
+    return res.status(statusCode).send(err.message);
   }
+
   res.sendStatus(500);
 }
