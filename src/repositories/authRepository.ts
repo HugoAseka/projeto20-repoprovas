@@ -1,9 +1,9 @@
 import { prisma } from "../config/database";
 import { users } from "@prisma/client";
 
-export type NewUserData = Omit<users, "id">;
+export type userData = Omit<users, "id">;
 
-export async function insertUserIntoDatabase(newUser: NewUserData) {
+export async function insertUserIntoDatabase(newUser: userData) {
   return await prisma.users.create({ data: newUser });
 }
 
@@ -14,3 +14,4 @@ export async function findUserByEmail(email: string) {
 export async function deleteUserById(id: number) {
   await prisma.users.delete({ where: { id } });
 }
+

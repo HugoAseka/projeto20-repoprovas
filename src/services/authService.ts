@@ -10,11 +10,11 @@ import {
 
 dotenv.config();
 
-async function createUser(data: authRepository.NewUserData) {
+export async function createUser(data: authRepository.userData) {
   const existingUser = await authRepository.findUserByEmail(data.email);
 
   if (existingUser) {
-    throw conflictError();
+    throw conflictError("Email already registered.");
   }
 
   const hashedPassword = bcrypt.hashSync(data.password, 10);
@@ -24,6 +24,23 @@ async function createUser(data: authRepository.NewUserData) {
   });
 }
 
-const authService = { createUser };
+export async function login(user: authRepository.userData) {
+   const {id} =  await userValidation(user);
+   const token = jwt.sign({userId: id}, process.env.JWT_SECRET);
+   return token;
+}
 
-export default authService;
+async function userValidation(user: authRepository.userData) {
+  const registeredUser = await authRepository.findUserByEmail(user.email);
+  if (!registeredUser) throw unauthorizedError("Invalid Credentials");
+
+  const isPasswordValid = bcrypt.compareSync(
+    user.password,
+    registeredUser.password
+  );
+  if (!isPasswordValid) throw unauthorizedError("Invalid Credentials");
+  return registeredUser;
+}
+
+
+
