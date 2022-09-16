@@ -29,7 +29,8 @@ model tests{
   pdfUrl String @db.VarChar(255)
   categoryId Int 
   category categories @relation(fields: [categoryId], references: [id])  
-
+  teacherDisciplineId Int
+  teacherDiscipline teachersDisciplines @relation(fields: [teacherDisciplineId],references: [id])
 }
 
 model teachersDisciplines{
@@ -38,6 +39,7 @@ model teachersDisciplines{
   teacher teachers @relation(fields: [teacherId], references: [id])
   disciplineId Int 
   discipline disciplines @relation(fields: [disciplineId], references: [id])
+  tests tests[]
 }
 
 model disciplines{
