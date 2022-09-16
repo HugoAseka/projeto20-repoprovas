@@ -5,6 +5,6 @@ import { authSchema } from "../schemas/authSchema";
 
 const authRouter = Router();
 
-authRouter.post("/cadastrar", validateSchemaMiddleware(authSchema), register);
+authRouter.post("/cadastro", validateSchemaMiddleware(authSchema), register);
 
 export default authRouter;
