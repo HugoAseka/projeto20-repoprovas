@@ -7,7 +7,7 @@ import { testSchema } from "../schemas/testsSchema";
 const testsRouter = Router();
 
 testsRouter.post(
-  "/tests",
+  "/testes",
   validateSchemaMiddleware(testSchema),
   authMiddleware,
   createTest

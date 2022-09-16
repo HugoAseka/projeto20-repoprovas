@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-interface NewUserRequest {
+export type NewUserRequest =  {
   email: string;
   password: string;
   passwordConfirmation: string;
