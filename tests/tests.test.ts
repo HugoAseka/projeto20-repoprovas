@@ -12,12 +12,14 @@ beforeEach(async () => {
 describe("Tests POST /tests ", () => {
   it("Returns 401 with invalid token", async () => {
     const createdUser = await createUser();
-    console.log(createdUser);
     const responseLogin = await supertest(app).post("/login").send(createdUser);
-    // const result = await supertest(app)
-    //   .post("/testes")
-    //   .send(validTest)
-    //   .set("Authorization", `Bearer ${responseLogin.body}`);
-    // expect(result.status).toEqual(200);
+    console.log(responseLogin.body.token)
+    const result = await supertest(app)
+    .post("/testes")
+    .send(validTest)
+    .set("Authorization", `Bearer ${responseLogin.body.token}`)
+    .set("Accept","application/json")
+    .expect(200)
+
   });
 });
