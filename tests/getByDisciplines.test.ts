@@ -1,8 +1,6 @@
-import supertest from "supertest";
-import app from "../src/index";
 import generateToken from "./factories/tokenFactory";
+import api from "./factories/apiFactory";
 
-const api = supertest(app);
 const route = "/testes/disciplinas"
 describe("Tests GET /testes/disciplinas  ", () => {
     it("return status code 200 and an array when requesting with valid token", async () => {

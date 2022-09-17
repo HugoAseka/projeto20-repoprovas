@@ -1,9 +1,6 @@
-import app from "../src/index";
-import supertest from "supertest";
 import { prisma } from "../src/config/database";
 import { createUser, generateNewUserData } from "./factories/userFactory";
-
-const api = supertest(app);
+import api from "./factories/apiFactory";
 
 beforeEach(async () => {
   await prisma.$executeRaw`TRUNCATE TABLE users;`;
