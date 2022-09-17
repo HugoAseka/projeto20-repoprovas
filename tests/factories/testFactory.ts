@@ -7,3 +7,10 @@ export const validTest = {
   discipline: "Humildade",
   teacher: "Bruna Hamori",
 };
+
+export const invalidTest = {
+  name: "calculo",
+  pdfUrl: "http://google.com.br",
+  category: "Projeto",
+  discipline: "Humildade",
+};
