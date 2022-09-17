@@ -8,6 +8,11 @@ export async function createTest(req: Request, res: Response) {
 }
 
 export async function getTestsByTerms(req: Request, res: Response) {
-  const test = await testsService.getTestsByTerms();
-  res.status(200).send(test);
+  const tests = await testsService.getTestsByTerms();
+  res.status(200).send(tests);
+}
+
+export async function getTestsByTeachers(req:Request,res:Response){
+  const tests = await testsService.getTestsByTeachers();
+  res.status(200).send(tests)
 }

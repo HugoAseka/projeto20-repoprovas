@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createTest, getTestsByTerms } from "../controllers/testsController";
+import { createTest, getTestsByTerms, getTestsByTeachers } from "../controllers/testsController";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware";
 import { authMiddleware } from "../middlewares/tokenValidation";
 import { testSchema } from "../schemas/testsSchema";
@@ -12,6 +12,7 @@ testsRouter.post(
   authMiddleware,
   createTest
 );
-testsRouter.get("/testes", authMiddleware, getTestsByTerms);
+testsRouter.get("/testes/disciplinas", authMiddleware, getTestsByTerms);
+testsRouter.get("/testes/instrutores", authMiddleware, getTestsByTeachers);
 
 export default testsRouter;

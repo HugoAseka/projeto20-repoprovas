@@ -21,46 +21,68 @@ export async function getAllTests() {
   });
 }
 
-
 export async function getTestsByTerms() {
-    const result = await prisma.terms.findMany(
-        {
+  const result = await prisma.terms.findMany({
+    select: {
+      id: true,
+      number: true,
+      discipline: {
+        select: {
+          id: true,
+          name: true,
+          teacherDiscipline: {
             select: {
-                id: true,
-                number: true,
-                discipline: {
-                    select: {
-                        id: true,
-                        name: true,
-                        teacherDiscipline: {
-                            select: {
-                                teacher: {
-                                    select: {
-                                        name: true
-                                    }
-                                },
-                                
-                                tests: {
-                                    orderBy: {
-                                        category:{
-                                            name:'desc'
-                                        },
-                                    },
-                                    select: {
-                                        id: true,
-                                        name: true,
-                                        pdfUrl: true,
-                                        category: true
-                                        
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    );
+              teacher: {
+                select: {
+                  name: true,
+                },
+              },
 
-    return result;
+              tests: {
+                orderBy: {
+                  category: {
+                    name: "desc",
+                  },
+                },
+                select: {
+                  id: true,
+                  name: true,
+                  pdfUrl: true,
+                  category: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+
+  return result;
+}
+
+export async function getTestsByTeachers() {
+  return await prisma.teachers.findMany({
+    select: {
+      id: true,
+      name: true,
+      teacherDiscipline: {
+        include: {
+          tests: {
+            orderBy: {
+              category: {
+                name: "asc",
+              },
+            },
+            select: {
+              id: true,
+              name: true,
+              pdfUrl: true,
+              category: true,
+            },
+          },
+        },
+      },
+    },
+  });
 }

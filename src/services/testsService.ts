@@ -15,8 +15,11 @@ export async function createTest(newTest: typeTestSchema) {
 }
 
 export async function getTestsByTerms() {
-  const alfa = await testRepository.getTestsByTerms();
-  return alfa;
+  return await testRepository.getTestsByTerms();
+}
+
+export async function getTestsByTeachers(){
+  return await testRepository.getTestsByTeachers();
 }
 
 async function properTestObj(reqTest: typeTestSchema): Promise<typeNewTest> {
