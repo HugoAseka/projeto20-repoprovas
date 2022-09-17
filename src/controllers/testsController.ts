@@ -6,3 +6,8 @@ export async function createTest(req: Request, res: Response) {
   const createdTest = await testsService.createTest(testData);
   res.status(201).send(createdTest);
 }
+
+export async function getTestsByTerms(req: Request, res: Response) {
+  const test = await testsService.getTestsByTerms();
+  res.status(200).send(test);
+}

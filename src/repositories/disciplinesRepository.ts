@@ -7,6 +7,7 @@ export async function findDisciplineByName(name: string) {
 }
 export async function findDisciplineOrFail(name: string): Promise<disciplines> {
     const discipline = await findDisciplineByName(name);
+    console.log(discipline)
     if (!discipline) throw notFoundError("Discipline doesn't exist.");
     return discipline;
   }

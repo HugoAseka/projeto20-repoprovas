@@ -18,6 +18,7 @@ export async function findTeacherDisciplineOrFail(
   disciplineId: number
 ): Promise<teachersDisciplines> {
   const resultArr = await findTeacherDisciplineByIds(teacherId, disciplineId);
-  if (resultArr.length === 0) throw notFoundError();
+  console.log(resultArr);
+  if (resultArr.length === 0) throw notFoundError("No professor teaches this discipline");
   return resultArr[0];
 }

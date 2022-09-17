@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createTest } from "../controllers/testsController";
+import { createTest, getTestsByTerms } from "../controllers/testsController";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware";
 import { authMiddleware } from "../middlewares/tokenValidation";
 import { testSchema } from "../schemas/testsSchema";
@@ -12,5 +12,6 @@ testsRouter.post(
   authMiddleware,
   createTest
 );
+testsRouter.get("/testes", authMiddleware, getTestsByTerms);
 
 export default testsRouter;
